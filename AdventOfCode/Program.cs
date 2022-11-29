@@ -1,3 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Common.Services;
 
-Console.WriteLine("Hello, World!");
+try
+{
+    IInputService inputService = new InputService(2021);
+    var temp = await inputService.GetInputOfDayAsync(10);
+    
+}
+catch(Exception exception)
+{
+    Console.WriteLine($"The following exception occured: {exception.Message}");
+}
