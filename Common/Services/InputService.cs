@@ -20,7 +20,7 @@ public class InputService : IInputService
         _baseUri = new Uri($"https://adventofcode.com/{_yearOfChallenge}/day/");
     }
 
-    public static async Task<InputService> CreateInputService(int yearOfChallenge)
+    public static async Task<InputService> CreateInputServiceAsync(int yearOfChallenge)
     {
         if (_inputServiceInstance != null) return _inputServiceInstance;
         _inputServiceInstance = new InputService(yearOfChallenge);
