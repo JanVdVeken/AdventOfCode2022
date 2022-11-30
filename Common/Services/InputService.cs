@@ -5,18 +5,27 @@ namespace Common.Services;
 
 public class InputService : IInputService
 {
+    private static InputService _inputServiceInstance;
+    
     private const int MaxAmountOfDays = 25;
     private readonly Uri _baseUri;
     private readonly string _inputsFolder;
     private readonly int _yearOfChallenge;
     private string[] _inputs;
-
-    public InputService(int yearOfChallenge)
+    private InputService(int yearOfChallenge)
     {
         _yearOfChallenge = yearOfChallenge;
         _inputs = new string[25];
         _inputsFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"../../../../_Inputs/"));
         _baseUri = new Uri($"https://adventofcode.com/{_yearOfChallenge}/day/");
+    }
+
+    public static async Task<InputService> CreateInputService(int yearOfChallenge)
+    {
+        if (_inputServiceInstance != null) return _inputServiceInstance;
+        _inputServiceInstance = new InputService(yearOfChallenge);
+        await _inputServiceInstance.GetAllPossibleInputs();
+        return _inputServiceInstance;
     }
     public async Task<string> GetInputOfDayAsync(int dayOfTheMonth)
     {

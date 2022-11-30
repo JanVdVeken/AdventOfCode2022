@@ -2,9 +2,7 @@
 
 try
 {
-    IInputService inputService = new InputService(2021);
-    var temp = await inputService.GetInputOfDayAsync(10);
-    
+    IInputService inputService = await InputService.CreateInputService(2021);
 }
 catch(Exception exception)
 {
