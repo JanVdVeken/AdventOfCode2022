@@ -1,18 +1,13 @@
-﻿using Common.Clients;
+﻿using AdventOfCode.Helpers;
+using Common.Clients;
 using Common.Services;
-using Microsoft.Extensions.Configuration;
 
-
+int yearOfChallenge = 2021;
 try
 {
-    var config = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json")
-        .AddUserSecrets<AoCConfig>()
-        .Build();
-    var section = config.GetSection(nameof(AoCConfig));
-    var aocClient = section.Get<AoCConfig>();
-    IInputService inputService = await InputService.CreateInputServiceAsync(2021, aocClient);
+    var aoCConfig = ConfigHelper.GetAoCConfig();
+    IAocClient _client = new AocClient(aoCConfig, yearOfChallenge);
+    IInputService inputService = await InputService.CreateInputServiceAsync(yearOfChallenge, _client);
 }
 catch (Exception exception)
 {
