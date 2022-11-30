@@ -2,6 +2,7 @@
 using Common.Services;
 using Microsoft.Extensions.Configuration;
 
+
 try
 {
     var config = new ConfigurationBuilder()
