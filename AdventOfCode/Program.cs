@@ -2,7 +2,7 @@
 
 try
 {
-    IInputService inputService = await InputService.CreateInputServiceAsync(2021);
+    IInputService inputService = await InputService.CreateInputServiceAsync(2022);
 }
 catch(Exception exception)
 {
