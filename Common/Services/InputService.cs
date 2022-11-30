@@ -1,10 +1,11 @@
-﻿using System.Net;
-using Common.Globals;
+﻿using Common.Clients;
+using System.Net;
 
 namespace Common.Services;
 
 public class InputService : IInputService
 {
+    private readonly AoCConfig _aocConfig;
     private static InputService _inputServiceInstance;
     
     private const int MaxAmountOfDays = 25;
@@ -12,18 +13,20 @@ public class InputService : IInputService
     private readonly string _inputsFolder;
     private readonly int _yearOfChallenge;
     private string[] _inputs;
-    private InputService(int yearOfChallenge)
+    private InputService(int yearOfChallenge, AoCConfig aocConfig)
     {
         _yearOfChallenge = yearOfChallenge;
+        _aocConfig = aocConfig;
         _inputs = new string[25];
         _inputsFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"../../../../_Inputs/"));
-        _baseUri = new Uri($"https://adventofcode.com/{_yearOfChallenge}/day/");
+        _baseUri = new Uri($"{_aocConfig.BaseAPIUrl}{_yearOfChallenge}/day/");
     }
 
-    public static async Task<InputService> CreateInputServiceAsync(int yearOfChallenge)
+    public static async Task<InputService> CreateInputServiceAsync(int yearOfChallenge, AoCConfig aocConfig)
     {
-        if (_inputServiceInstance != null) return _inputServiceInstance;
-        _inputServiceInstance = new InputService(yearOfChallenge);
+        if (_inputServiceInstance is not null) return _inputServiceInstance;
+
+        _inputServiceInstance = new InputService(yearOfChallenge, aocConfig);
         await _inputServiceInstance.GetAllPossibleInputs();
         return _inputServiceInstance;
     }
@@ -56,7 +59,7 @@ public class InputService : IInputService
         var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
         using var client = new HttpClient(handler) { BaseAddress = _baseUri};
         client.DefaultRequestHeaders.Add("Accept", "application/json");
-        cookieContainer.Add(_baseUri, new Cookie("session",SessionParams.SessionKey));
+        cookieContainer.Add(_baseUri, new Cookie("session", _aocConfig.SessionKey));
         return await client.GetStringAsync($"{day+1}/input");
     }
     private int DecideAmountOfDays()
