@@ -51,7 +51,6 @@ namespace Common.Services
             }
             return 0;
         }
-
         public static async Task<InputService> CreateInputServiceAsync(int yearOfChallenge, IAocClient aocClient)
         {
             if (_inputServiceInstance is not null) return _inputServiceInstance;

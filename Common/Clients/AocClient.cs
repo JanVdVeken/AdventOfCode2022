@@ -23,5 +23,21 @@ namespace Common.Clients
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             return await client.GetStringAsync($"{day}/input");
         }
+
+        public async Task<string> PostAnswerForDayAsync(int day,int dayPart, string answer)
+        {
+            using var client = new HttpClient(new HttpClientHandler() {CookieContainer = _container })
+            {
+                BaseAddress = _baseUri 
+            };
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var values = new Dictionary<string, string>
+            {
+                { "level", $"{dayPart}"},
+                { "answer", $"{answer}" }   
+            };
+            var response = await client.PostAsync($"{day}/answer", new FormUrlEncodedContent(values));
+            return await response.Content.ReadAsStringAsync();
+        }
     }
 }
