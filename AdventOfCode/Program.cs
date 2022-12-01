@@ -4,7 +4,7 @@ using Common;
 using Common.Clients;
 using Common.Services;
 
-var yearOfChallenge = 2017;
+var yearOfChallenge = 2022;
 try
 {
     IAocClient client = new AocClient(ConfigHelper.GetAoCConfig(), yearOfChallenge);
@@ -12,7 +12,7 @@ try
     IAnswerService answerService = new AnswerService(client);
     List<Day> Days = new()
     {
-        new Day01(inputService,answerService,1,"")
+        new Day01(inputService,answerService,1,"Calorie Counting")
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)

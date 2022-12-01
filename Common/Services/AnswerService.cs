@@ -21,9 +21,9 @@ public class AnswerService : IAnswerService
         }
         if (result.Contains("You gave an answer too recently"))
         {
-            return new ToSoonAnswer("Wait some a long time before doing something stupid again");
+            return new ToSoonAnswer("Wait a long time before doing something stupid again");
         }
-        if (result.Contains("wrong"))
+        if (result.ToLower().Contains("wrong"))
         {
             return new WrongAnswer($"{answer} was the wrong answer for {day} part {dayPart}");
         }
