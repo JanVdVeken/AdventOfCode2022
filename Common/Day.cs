@@ -26,7 +26,7 @@ public abstract class Day
 
     public async Task HandleSelect()
     {
-        Console.WriteLine("Do you want to solve Part 1 or 2?");
+        Console.WriteLine("Do you want to solve Part 1(S) or 2(S)?");
         var answer = "";
         switch (Console.ReadLine())
         {
