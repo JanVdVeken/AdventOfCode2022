@@ -1,7 +1,7 @@
 ﻿using Common;
 using Common.Services;
 
-namespace AoC2022Days.Day01;
+namespace AoC2022Days;
 
 public class Day01 : Day
 {

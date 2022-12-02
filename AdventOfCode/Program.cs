@@ -1,5 +1,5 @@
 ﻿using AdventOfCode.Helpers;
-using AoC2022Days.Day01;
+using AoC2022Days;
 using Common;
 using Common.Clients;
 using Common.Services;
@@ -12,7 +12,8 @@ try
     IAnswerService answerService = new AnswerService(client);
     List<Day> Days = new()
     {
-        new Day01(inputService,answerService,1,"Calorie Counting")
+        new Day01(inputService,answerService,1,"Calorie Counting"),
+        new Day02(inputService,answerService,2,"Rock Paper Scissors")
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)

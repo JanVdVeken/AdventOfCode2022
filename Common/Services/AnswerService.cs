@@ -27,6 +27,10 @@ public class AnswerService : IAnswerService
         {
             return new WrongAnswer($"{answer} was the wrong answer for {day} part {dayPart}");
         }
-        return new SuccessfulAnswer($"Successfully completed day {day} part {dayPart}");
+        if(result.ToLower().Contains("star"))
+        {
+            return new SuccessfulAnswer($"Successfully completed day {day} part {dayPart}");
+        }
+        return new GenericAnswer($"We did not found any relation between the known ansers! {result}");
     }
 }
