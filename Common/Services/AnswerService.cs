@@ -31,6 +31,6 @@ public class AnswerService : IAnswerService
         {
             return new SuccessfulAnswer($"Successfully completed day {day} part {dayPart}");
         }
-        return new GenericAnswer($"We did not found any relation between the known ansers! {result}");
+        return new GenericAnswer($"We did not found any relation between the known answers and the response we got back! {result}");
     }
 }

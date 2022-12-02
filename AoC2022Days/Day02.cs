@@ -12,13 +12,20 @@ namespace AoC2022Days
 
         public override string Puzzle1(IEnumerable<string> inputsString)
         {
-            return inputsString.Where(i => !string.IsNullOrEmpty(i)).Select(input => new RockPaperScissors(input)).ToList().Select(rps => rps.CalculateScore()).Sum().ToString();
+            return inputsString.Where(i => !string.IsNullOrEmpty(i))
+                .Select(input => new RockPaperScissors(input))
+                .Select(rps => rps.CalculateScore())
+                .Sum()
+                .ToString();
         }
 
         public override string Puzzle2(IEnumerable<string> inputsString)
         {
-            return inputsString.Where(i => !string.IsNullOrEmpty(i)).Select(input => new RockPaperScissors(input)).ToList().Select(rps => rps.CalculateScoreWithOwnEnding()).Sum().ToString();
-
+            return inputsString.Where(i => !string.IsNullOrEmpty(i))
+                .Select(input => new RockPaperScissors(input))
+                .Select(rps => rps.CalculateScoreWithOwnEnding())
+                .Sum()
+                .ToString();
         }
     }
 }
