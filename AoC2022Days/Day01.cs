@@ -40,6 +40,6 @@ public class Day01 : Day
             }
             elfs[currentElf] += int.Parse(input);
         }
-        return elfs.Values.OrderBy(x => x).Skip(currentElf - 2).Sum().ToString();
+        return elfs.Values.OrderByDescending(x => x).Take(3).Sum().ToString();
     }
 }
