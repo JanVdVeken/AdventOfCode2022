@@ -27,7 +27,7 @@ public class AnswerService : IAnswerService
         {
             return new WrongAnswer($"{answer} was the wrong answer for {day} part {dayPart}");
         }
-        if(result.ToLower().Contains("star"))
+        if(result.ToLower().Contains("That's the right answer!"))
         {
             return new SuccessfulAnswer($"Successfully completed day {day} part {dayPart}");
         }

@@ -13,7 +13,8 @@ try
     List<Day> Days = new()
     {
         new Day01(inputService,answerService,1,"Calorie Counting"),
-        new Day02(inputService,answerService,2,"Rock Paper Scissors")
+        new Day02(inputService,answerService,2,"Rock Paper Scissors"),
+        new Day03(inputService,answerService,3,"Rucksack Reorganization"),
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)
