@@ -1,7 +1,6 @@
 ﻿using AoC2022Days.DayHelpers.Day05;
 using Common;
 using Common.Services;
-using System.Text.RegularExpressions;
 
 namespace AoC2022Days
 {
@@ -13,26 +12,22 @@ namespace AoC2022Days
 
         public override string Puzzle1(IEnumerable<string> inputsString)
         {
-            List<string> startingStacks = inputsString.Where(x => !x.Contains("move") && !string.IsNullOrEmpty(x)).ToList();
-            List<Procedure> procedures = inputsString.Where(x => x.Contains("move")).Select(x => new Procedure(x)).ToList();
-            var ship = new Ship(startingStacks);
-            foreach(Procedure proc in procedures)
-            {
-                ship.MoveCrateMover9000(proc);
-            }
+            var ship = new Ship(inputsString.Where(x => !x.Contains("move") && !string.IsNullOrEmpty(x)).ToList());
+            inputsString.Where(x => x.Contains("move"))
+                .Select(x => new Procedure(x))
+                .ToList()
+                .ForEach(x => ship.MoveCrateMover9000(x));
             return ship.GetTopOfStacks();
         }
         
 
         public override string Puzzle2(IEnumerable<string> inputsString)
         {
-            List<string> startingStacks = inputsString.Where(x => !x.Contains("move") && !string.IsNullOrEmpty(x)).ToList();
-            List<Procedure> procedures = inputsString.Where(x => x.Contains("move")).Select(x => new Procedure(x)).ToList();
-            var ship = new Ship(startingStacks);
-            foreach (Procedure proc in procedures)
-            {
-                ship.MoveCrateMover9001(proc);
-            }
+            var ship = new Ship(inputsString.Where(x => !x.Contains("move") && !string.IsNullOrEmpty(x)).ToList());
+            inputsString.Where(x => x.Contains("move"))
+                .Select(x => new Procedure(x))
+                .ToList()
+                .ForEach(x => ship.MoveCrateMover9001(x));
             return ship.GetTopOfStacks();
         }
     }
