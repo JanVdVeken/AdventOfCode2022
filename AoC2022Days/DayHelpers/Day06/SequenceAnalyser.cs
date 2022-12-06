@@ -12,22 +12,20 @@ public class SequenceAnalyser
     public int CalculateStartOfPacketMarker()
     {
         int disctinctCharacter = 4;
-        var inputArray = _sequence.ToCharArray();
         int i;
-        for (i = 0; i < inputArray.Length-disctinctCharacter; i++)
+        for (i = 0; i < _sequence.Length-disctinctCharacter; i++)
         {
-            if(inputArray.SubArray(i, disctinctCharacter).Distinct().Count() == disctinctCharacter) break;
+            if(_sequence.Substring(i, disctinctCharacter).Distinct().Count() == disctinctCharacter) break;
         }
         return i +disctinctCharacter;
     }
     public int CalculateStartOfMessageMarker()
     {
         int disctinctCharacter = 14;
-        var inputArray = _sequence.ToCharArray();
         int i;
-        for (i = 0; i < inputArray.Length-disctinctCharacter; i++)
+        for (i = 0; i < _sequence.Length-disctinctCharacter; i++)
         {
-            if(inputArray.SubArray(i, disctinctCharacter).Distinct().Count() == disctinctCharacter) break;
+            if(_sequence.Substring(i, disctinctCharacter).Distinct().Count() == disctinctCharacter) break;
         }
         return i +disctinctCharacter;
     }
