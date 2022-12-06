@@ -8,25 +8,23 @@ public class SequenceAnalyser
     {
         _sequence = sequence;
     }
+
+    private int CalculateStartOfMarker(int distinctCharacters)
+    {
+        int i;
+        for (i = 0; i < _sequence.Length - distinctCharacters; i++)
+        {
+            if (_sequence.Substring(i, distinctCharacters).Distinct().Count() == distinctCharacters) break;
+        }
+        return i + distinctCharacters;
+    }
     
     public int CalculateStartOfPacketMarker()
     {
-        int disctinctCharacter = 4;
-        int i;
-        for (i = 0; i < _sequence.Length-disctinctCharacter; i++)
-        {
-            if(_sequence.Substring(i, disctinctCharacter).Distinct().Count() == disctinctCharacter) break;
-        }
-        return i +disctinctCharacter;
+       return CalculateStartOfMarker(4);
     }
     public int CalculateStartOfMessageMarker()
     {
-        int disctinctCharacter = 14;
-        int i;
-        for (i = 0; i < _sequence.Length-disctinctCharacter; i++)
-        {
-            if(_sequence.Substring(i, disctinctCharacter).Distinct().Count() == disctinctCharacter) break;
-        }
-        return i +disctinctCharacter;
+        return CalculateStartOfMarker(14);
     }
 }
