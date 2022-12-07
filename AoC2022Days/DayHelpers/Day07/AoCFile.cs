@@ -11,9 +11,9 @@ public class AoCFile
 	public AoCFile(string input)
 	{
 		var temp = input.Trim().Split(" ");
-        _size = int.Parse(temp[0].Trim());
-        _name = temp[1].Trim();
-    }   
+       	 	_size = int.Parse(temp[0].Trim());
+       		_name = temp[1].Trim();
+   	 }   
 
 	public string ToString(int indentations)
 	{
