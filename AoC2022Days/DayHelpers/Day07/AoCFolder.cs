@@ -29,11 +29,11 @@ public class AoCFolder
     }
     public AoCFolder GetFolder(string input) => _folders.SingleOrDefault(x => x.Name == input);
 
-    public int CalculateSumOfDirectoriesAtMost100000()
+    public int CalculateSumOfDirectoriesAtMost(int maxSize)
     {
         var returnValue = 0;
-        returnValue += CalculateSizeOfFolder() <= 100000 ? CalculateSizeOfFolder() : 0;
-        return returnValue + _folders.Select(f => f.CalculateSumOfDirectoriesAtMost100000()).Sum();
+        returnValue += CalculateSizeOfFolder() <= maxSize ? CalculateSizeOfFolder() : 0;
+        return returnValue + _folders.Select(f => f.CalculateSumOfDirectoriesAtMost(maxSize)).Sum();
     }
 
     public List<AoCFolder> GetFoldersWithSizeBiggerThan(int neededSize)

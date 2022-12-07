@@ -14,7 +14,7 @@ public class Day07 : Day
     {
         var fileSystem = new AoCFileSystem(inputsString.Where(x => !string.IsNullOrEmpty(x)).ToList());
         Console.WriteLine(fileSystem.ToString());
-        return fileSystem.CalculateSumOfDirectoriesAtMost100000().ToString();
+        return fileSystem.CalculateSumOfDirectoriesAtMost(100000).ToString();
     }
 
     public override string Puzzle2(IEnumerable<string> inputsString)

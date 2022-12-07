@@ -27,7 +27,7 @@ namespace Aoc2022Days.Test.Day07
             var expectedResult = 95437;
             var fileSystem = new AoCFileSystem(testinput);
 
-            var result = fileSystem.CalculateSumOfDirectoriesAtMost100000();
+            var result = fileSystem.CalculateSumOfDirectoriesAtMost(100000);
 
             Assert.AreEqual(expectedResult, result);
         }

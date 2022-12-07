@@ -12,7 +12,6 @@ public class AoCFileSystem
         _currentFolder = _rootFolder;
         inputs.ForEach(x => ExecuteCommand(x));
     }
-
     public void ExecuteCommand(string input)
     {
         if (input.Contains("/")) return;
@@ -38,15 +37,9 @@ public class AoCFileSystem
         }
     }
 
-    public override string ToString()
-    {
-        return _rootFolder.ToString(0);
-    }
+    public override string ToString() => _rootFolder.ToString(0);
 
-    public int CalculateSumOfDirectoriesAtMost100000()
-    {
-        return _rootFolder.CalculateSumOfDirectoriesAtMost100000();
-    }
+    public int CalculateSumOfDirectoriesAtMost(int maxSize) => _rootFolder.CalculateSumOfDirectoriesAtMost(maxSize);
 
     public int GetSizeOfSmallestDirectoryToDelete(int neededFreeSpace)
     {
