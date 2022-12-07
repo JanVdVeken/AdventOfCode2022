@@ -1,6 +1,4 @@
-﻿using AoC2022Days.DayHelpers.Day02;
-using AoC2022Days;
-using Common.Services;
+﻿using Common.Services;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -16,7 +14,7 @@ namespace Aoc2022Days.Test.Day02
         {
             var answerService = Substitute.For<IAnswerService>();
             var inputService = Substitute.For<IInputService>();
-            var day = new AoC2022Days.Day02(inputService, answerService, 2, "Rock Paper Scissors");
+            var day = new AoC2022Days.Days.Day02(inputService, answerService, 2, "Rock Paper Scissors");
             var expectedResult = "15";
 
             var result = day.Puzzle1(inputList);
@@ -29,7 +27,7 @@ namespace Aoc2022Days.Test.Day02
         {
             var answerService = Substitute.For<IAnswerService>();
             var inputService = Substitute.For<IInputService>();
-            var day = new AoC2022Days.Day02(inputService, answerService, 2, "Rock Paper Scissors");
+            var day = new AoC2022Days.Days.Day02(inputService, answerService, 2, "Rock Paper Scissors");
             var expectedResult = "12";
 
             var result = day.Puzzle2(inputList);

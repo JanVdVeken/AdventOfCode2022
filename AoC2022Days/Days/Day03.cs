@@ -2,7 +2,7 @@
 using Common;
 using Common.Services;
 
-namespace AoC2022Days;
+namespace AoC2022Days.Days;
 
 public class Day03 : Day
 {
@@ -28,9 +28,9 @@ public class Day03 : Day
         var rucksackList = inputsString.Where(i => !string.IsNullOrEmpty(i))
             .Select(input => new Rucksack(input)).ToList();
         var totalSum = 0;
-        for (int i = 0; i < rucksackList.Count; i = i+3)
+        for (int i = 0; i < rucksackList.Count; i = i + 3)
         {
-            var temp = new Group(rucksackList[i], rucksackList[i+1], rucksackList[i+2]);
+            var temp = new Group(rucksackList[i], rucksackList[i + 1], rucksackList[i + 2]);
             temp.CalculateCommonElement();
             totalSum += temp.GetPriority();
         }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AoC2022Days\AoC2022Days.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

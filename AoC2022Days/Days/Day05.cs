@@ -2,7 +2,7 @@
 using Common;
 using Common.Services;
 
-namespace AoC2022Days
+namespace AoC2022Days.Days
 {
     public class Day05 : Day
     {
@@ -19,7 +19,7 @@ namespace AoC2022Days
                 .ForEach(x => ship.MoveCrateMover9000(x));
             return ship.GetTopOfStacks();
         }
-        
+
 
         public override string Puzzle2(IEnumerable<string> inputsString)
         {

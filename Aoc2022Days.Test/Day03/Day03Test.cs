@@ -20,7 +20,7 @@ public class Day03Test
     {
         var answerService = Substitute.For<IAnswerService>();
         var inputService = Substitute.For<IInputService>();
-        var day = new AoC2022Days.Day03(inputService, answerService, 3, "Rucksack Reorganization");
+        var day = new AoC2022Days.Days.Day03(inputService, answerService, 3, "Rucksack Reorganization");
         var expectedResult = "157";
 
         var result = day.Puzzle1(inputs);
@@ -32,7 +32,7 @@ public class Day03Test
     {
         var answerService = Substitute.For<IAnswerService>();
         var inputService = Substitute.For<IInputService>();
-        var day = new AoC2022Days.Day03(inputService, answerService, 3, "Rucksack Reorganization");
+        var day = new AoC2022Days.Days.Day03(inputService, answerService, 3, "Rucksack Reorganization");
         var expectedResult = "70";
 
         var result = day.Puzzle2(inputs);
