@@ -1,5 +1,7 @@
-﻿using Common;
+﻿using AoC2022Days.DayHelpers.Day07;
+using Common;
 using Common.Services;
+using System;
 
 namespace AoC2022Days;
 
@@ -11,11 +13,15 @@ public class Day07 : Day
 
     public override string Puzzle1(IEnumerable<string> inputsString)
     {
-        throw new NotImplementedException();
+        var fileSystem = new AoCFileSystem(inputsString.Where(x => !string.IsNullOrEmpty(x)).ToList());
+        Console.WriteLine(fileSystem.ToString());
+        return fileSystem.CalculateSumOfDirectoriesAtMost100000().ToString();
     }
 
     public override string Puzzle2(IEnumerable<string> inputsString)
     {
-        throw new NotImplementedException();
+        var fileSystem = new AoCFileSystem(inputsString.Where(x => !string.IsNullOrEmpty(x)).ToList());
+        Console.WriteLine(fileSystem.ToString());
+        return fileSystem.GetSizeOfSmallestDirectoryToDelete(30000000).ToString();
     }
 }
