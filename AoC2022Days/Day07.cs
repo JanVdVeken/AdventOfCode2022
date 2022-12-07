@@ -1,7 +1,6 @@
 ﻿using AoC2022Days.DayHelpers.Day07;
 using Common;
 using Common.Services;
-using System;
 
 namespace AoC2022Days;
 

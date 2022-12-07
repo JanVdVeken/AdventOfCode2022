@@ -17,15 +17,9 @@ public class AoCFolder
         _files = new List<AoCFile>();
     }
 
-    public void AddFolder(AoCFolder folder)
-    {
-        _folders.Add(folder);
-    }
+    public void AddFolder(AoCFolder folder) => _folders.Add(folder);
 
-    public void AddFile(AoCFile file)
-    {
-        _files.Add(file);
-    }
+    public void AddFile(AoCFile file) => _files.Add(file);
 
     private int _sizeOfFolder;
     public int CalculateSizeOfFolder()
@@ -33,17 +27,6 @@ public class AoCFolder
         if (_sizeOfFolder == 0) _sizeOfFolder = _folders.Select(x => x.CalculateSizeOfFolder()).Sum() + _files.Select(x => x.Size).Sum();
         return _sizeOfFolder;
     }
-
-    public string ToString(int indentations)
-    {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < indentations; i++) sb.Append("  ");
-        sb.AppendLine($"- {_name} (dir)");
-        _folders.ForEach(f => sb.Append(f.ToString(indentations + 1)));
-        _files.ForEach(f => sb.AppendLine(f.ToString(indentations + 1)));
-        return sb.ToString();
-    }
-
     public AoCFolder GetFolder(string input) => _folders.SingleOrDefault(x => x.Name == input);
 
     public int CalculateSumOfDirectoriesAtMost100000()
@@ -63,5 +46,15 @@ public class AoCFolder
             .ForEach(x => correctFolders.AddRange(x));
 
         return correctFolders;
+    }
+
+    public string ToString(int indentations)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(new string(' ',2*indentations));
+        sb.AppendLine($"- {_name} (dir)");
+        _folders.ForEach(f => sb.Append(f.ToString(indentations + 1)));
+        _files.ForEach(f => sb.AppendLine(f.ToString(indentations + 1)));
+        return sb.ToString();
     }
 }

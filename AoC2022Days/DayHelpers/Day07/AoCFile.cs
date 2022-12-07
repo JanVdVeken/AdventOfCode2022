@@ -18,8 +18,8 @@ public class AoCFile
 	public string ToString(int indentations)
 	{
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0;i < indentations; i++) sb.Append("  ");
-		sb.Append($"- {_name} (file, size={_size})");
+        sb.Append(new string(' ', 2 * indentations));
+        sb.Append($"- {_name} (file, size={_size})");
         return sb.ToString();
 	}
 }
