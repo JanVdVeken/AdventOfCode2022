@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using AoC2022Days.DayHelpers.Day08;
+using Common;
 using Common.Services;
 
 namespace AoC2022Days.Days;
@@ -11,11 +12,13 @@ public class Day08 : Day
 
     public override string Puzzle1(IEnumerable<string> inputsString)
     {
-        throw new NotImplementedException();
+        var treeMap = new TreeMap(inputsString.Where(x => !string.IsNullOrEmpty(x)).ToList());
+        return treeMap.VisibleTreesFromOutside().ToString();
     }
 
     public override string Puzzle2(IEnumerable<string> inputsString)
     {
-        throw new NotImplementedException();
+        var treeMap = new TreeMap(inputsString.Where(x => !string.IsNullOrEmpty(x)).ToList());
+        return treeMap.CalculateHighestScenicScore().ToString();
     }
 }
