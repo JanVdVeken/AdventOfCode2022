@@ -3,6 +3,8 @@
 public class TreeMap
 {
     public List<Tree> Trees;
+    private int maxRow;
+    private int maxCol;
     public TreeMap(List<string> inputs)
     {
         Trees = new List<Tree>();
@@ -14,6 +16,8 @@ public class TreeMap
                 Trees.Add(new Tree(currentRow, currentCol, int.Parse(input[currentCol].ToString()), false));
             }
         }
+        maxRow = Trees.Max(t => t.Row);
+        maxCol = Trees.Max(t => t.Col);
         CalculateVisibility();
     }
     public Tree GetTree(int column, int row) => Trees.SingleOrDefault(tree => tree.Row == row && tree.Col == column);
@@ -59,14 +63,13 @@ public class TreeMap
 
     public int CalculateHighestScenicScore()
     {
-        return Trees.Select(tree => CalculateSceniceScore(tree))
+        return Trees.Where(t => t.Row != 0 && t.Row != maxRow && t.Col != 0 && t.Col != maxCol)
+                    .Select(tree => CalculateSceniceScore(tree))
                     .Max();
     }
 
     private int CalculateSceniceScore(Tree tree)
     {
-        var maxRow = Trees.Max(t => t.Row);
-        var maxCol = Trees.Max(t => t.Col);
         var rightCount = 0;
         var leftCount = 0;
         var topCount = 0;
@@ -119,6 +122,8 @@ public class TreeMap
                 break;
             }
         }
+        if (leftCount == 0) return 0;
+
         return rightCount* leftCount * topCount* bottomCount;
     }
 }
