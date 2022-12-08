@@ -20,6 +20,7 @@ try
         new Day05(inputService,answerService,5,"Supply Stacks"),
         new Day06(inputService,answerService,6,"Tuning Trouble"),
         new Day07(inputService,answerService,7,"No Space Left On Device"),
+        new Day08(inputService,answerService,8,"Treetop Tree House"),
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)
