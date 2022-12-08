@@ -69,36 +69,37 @@ public class TreeMap
         var maxCol = Trees.Max(t => t.Col);
         var rightCount = 0;
         var leftCount = 0;
-        var TopCount = 0;
-        var BottomCount = 0;
-        for(int i = tree.Row+1;i <= maxRow;i++)
+        var topCount = 0;
+        var bottomCount = 0;
+        var horizontalAndVerticalNeighbours = Trees.Where(t => t.Row == tree.Row || t.Col == tree.Col);
+        for (int i = tree.Row+1;i <= maxRow;i++)
         {
-            var currentTree = Trees.SingleOrDefault(t => t.Col == tree.Col && t.Row == i);
+            var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Col == tree.Col && t.Row == i);
 
             if (currentTree is null) break;
-            BottomCount++;
+            bottomCount++;
             if (currentTree.Height >= tree.Height)
             {
                 break;
             }
         }
-        if (BottomCount == 0) return 0;
+        if (bottomCount == 0) return 0;
 
         for (int i = tree.Row-1; i >= 0; i--)
         {
-            var currentTree = Trees.SingleOrDefault(t => t.Col == tree.Col && t.Row == i);
+            var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Col == tree.Col && t.Row == i);
             if (currentTree is null) break;
-            TopCount++;
+            topCount++;
             if (currentTree.Height >= tree.Height)
             {
                 break;
             }
         }
-        if (TopCount == 0) return 0;
+        if (topCount == 0) return 0;
 
         for (int i = tree.Col+1; i <= maxCol; i++)
         {
-            var currentTree = Trees.SingleOrDefault(t => t.Row == tree.Row && t.Col == i);
+            var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Row == tree.Row && t.Col == i);
             if (currentTree is null) break;
             rightCount++;
             if (currentTree.Height >= tree.Height)
@@ -110,7 +111,7 @@ public class TreeMap
 
         for (int i = tree.Col-1; i >=0; i--)
         {
-            var currentTree = Trees.SingleOrDefault(t => t.Row == tree.Row && t.Col == i);
+            var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Row == tree.Row && t.Col == i);
             if (currentTree is null) break;
             leftCount++;
             if (currentTree.Height >= tree.Height)
@@ -118,6 +119,6 @@ public class TreeMap
                 break;
             }
         }
-        return rightCount* leftCount * TopCount* BottomCount;
+        return rightCount* leftCount * topCount* bottomCount;
     }
 }
