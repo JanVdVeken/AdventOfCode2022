@@ -18,12 +18,12 @@ public class TreeMap
         }
         maxRow = Trees.Max(t => t.Row);
         maxCol = Trees.Max(t => t.Col);
-        CalculateVisibility();
     }
     public Tree GetTree(int column, int row) => Trees.SingleOrDefault(tree => tree.Row == row && tree.Col == column);
 
     public int VisibleTreesFromOutside()
     {
+        CalculateVisibility();
         return Trees.Count(t => t.IsVisible);
     }
 
