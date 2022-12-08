@@ -47,15 +47,15 @@ public class TreeMap
         {
             case Sides.Top:
                 currentTrees = Trees.Where(t => t.Col == tree.Col && t.Row < tree.Row).ToList();
-                    break;
+                break;
             case Sides.Bottom:
                 currentTrees = Trees.Where(t => t.Col == tree.Col && t.Row > tree.Row).ToList();
                 break;
             case Sides.Left:
-                currentTrees = Trees.Where(t => t.Row == tree.Row && t.Col < tree.Col).ToList(); 
+                currentTrees = Trees.Where(t => t.Row == tree.Row && t.Col < tree.Col).ToList();
                 break;
             case Sides.Right:
-                currentTrees = Trees.Where(t => t.Row == tree.Row && t.Col > tree.Col).ToList(); 
+                currentTrees = Trees.Where(t => t.Row == tree.Row && t.Col > tree.Col).ToList();
                 break;
         }
         return currentTrees.All(t => t.Height < tree.Height);
@@ -70,60 +70,44 @@ public class TreeMap
 
     private int CalculateSceniceScore(Tree tree)
     {
-        var rightCount = 0;
-        var leftCount = 0;
-        var topCount = 0;
-        var bottomCount = 0;
+        int rightCount = 0, leftCount = 0, topCount = 0, bottomCount = 0;
         var horizontalAndVerticalNeighbours = Trees.Where(t => t.Row == tree.Row || t.Col == tree.Col);
-        for (int i = tree.Row+1;i <= maxRow;i++)
+        for (int i = tree.Row + 1; i <= maxRow; i++)
         {
             var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Col == tree.Col && t.Row == i);
-
             if (currentTree is null) break;
             bottomCount++;
-            if (currentTree.Height >= tree.Height)
-            {
-                break;
-            }
+            if (currentTree.Height >= tree.Height) break;
         }
         if (bottomCount == 0) return 0;
 
-        for (int i = tree.Row-1; i >= 0; i--)
+        for (int i = tree.Row - 1; i >= 0; i--)
         {
             var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Col == tree.Col && t.Row == i);
             if (currentTree is null) break;
             topCount++;
-            if (currentTree.Height >= tree.Height)
-            {
-                break;
-            }
+            if (currentTree.Height >= tree.Height) break;
         }
         if (topCount == 0) return 0;
 
-        for (int i = tree.Col+1; i <= maxCol; i++)
+        for (int i = tree.Col + 1; i <= maxCol; i++)
         {
             var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Row == tree.Row && t.Col == i);
             if (currentTree is null) break;
             rightCount++;
-            if (currentTree.Height >= tree.Height)
-            {
-                break;
-            }
+            if (currentTree.Height >= tree.Height) break;
         }
         if (rightCount == 0) return 0;
 
-        for (int i = tree.Col-1; i >=0; i--)
+        for (int i = tree.Col - 1; i >= 0; i--)
         {
             var currentTree = horizontalAndVerticalNeighbours.SingleOrDefault(t => t.Row == tree.Row && t.Col == i);
             if (currentTree is null) break;
             leftCount++;
-            if (currentTree.Height >= tree.Height)
-            {
-                break;
-            }
+            if (currentTree.Height >= tree.Height) break;
         }
         if (leftCount == 0) return 0;
 
-        return rightCount* leftCount * topCount* bottomCount;
+        return rightCount * leftCount * topCount * bottomCount;
     }
 }
