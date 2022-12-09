@@ -12,14 +12,16 @@ namespace AoC2022Days.Days
 
         public override string Puzzle1(IEnumerable<string> inputsString)
         {
-            var routeInterpreter = new RouteInterpreter(inputsString.Where(x => !string.IsNullOrEmpty(x)));
+            var routeInterpreter = new RouteInterpreter(inputsString.Where(x => !string.IsNullOrEmpty(x))
+                            .Select(x => new Move(char.Parse(x.Split(" ")[0]), int.Parse(x.Split(" ")[1]))));
             routeInterpreter.CalculateRoute();
             return routeInterpreter.AmountOfVisitedPointsSingleTail().ToString();
         }
 
         public override string Puzzle2(IEnumerable<string> inputsString)
         {
-            var routeInterpreter = new RouteInterpreter(inputsString.Where(x => !string.IsNullOrEmpty(x)));
+            var routeInterpreter = new RouteInterpreter(inputsString.Where(x => !string.IsNullOrEmpty(x))
+                            .Select(x => new Move(char.Parse(x.Split(" ")[0]), int.Parse(x.Split(" ")[1]))));
             routeInterpreter.CalculateRoute();
             return routeInterpreter.AmountOfVisitedPointsLongTail().ToString();
         }

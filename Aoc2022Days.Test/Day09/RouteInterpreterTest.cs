@@ -12,7 +12,9 @@ namespace Aoc2022Days.Test.Day09
         [TestCase("R 4\r\nU 4\r\nL 3\r\nD 1\r\nR 4\r\nD 1\r\nL 5\r\nR 2", 13)]
         public void AmountOfVisitedPointsSingleTail_WithTestInput_ShouldReturnCorrectValue(string inputs, int expectedResult)
         {
-            var routeInterpreter = new RouteInterpreter(inputs.Split("\r\n").Where(x => !string.IsNullOrEmpty(x)));
+            var routeInterpreter = new RouteInterpreter(inputs.Split("\r\n")
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(x => new Move(char.Parse(x.Split(" ")[0]), int.Parse(x.Split(" ")[1]))));
             routeInterpreter.CalculateRoute();
 
             var result = routeInterpreter.AmountOfVisitedPointsSingleTail();
@@ -25,7 +27,9 @@ namespace Aoc2022Days.Test.Day09
 
         public void AmountOfVisitedPointsLongTail_WithTestInput_ShouldReturnCorrectValue(string inputString, int expectedResult)
         {
-            var routeInterpreter = new RouteInterpreter(inputString.Split("\r\n").Where(x => !string.IsNullOrEmpty(x)));
+            var routeInterpreter = new RouteInterpreter(inputString.Split("\r\n")
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(x => new Move(char.Parse(x.Split(" ")[0]), int.Parse(x.Split(" ")[1]))));
             routeInterpreter.CalculateRoute();
 
             var result = routeInterpreter.AmountOfVisitedPointsLongTail();
@@ -35,7 +39,9 @@ namespace Aoc2022Days.Test.Day09
         [Test]
         public void GetPointOfTail_WithGivenInput_ShouldReturnCorrectPoints()
         {
-            var input = "R 5\r\nU 8".Split("\r\n").ToList();
+            var input = "R 5\r\nU 8".Split("\r\n")
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(x => new Move(char.Parse(x.Split(" ")[0]), int.Parse(x.Split(" ")[1])));
             var routeInterpreter = new RouteInterpreter(input);
             routeInterpreter.CalculateRoute();
 
@@ -47,21 +53,25 @@ namespace Aoc2022Days.Test.Day09
         [Test]
         public void GetFullRope_WithGivenInput_ShouldReturnCorrectPoints()
         {
-            var input = "R 5\r\nU 8".Split("\r\n").ToList();
+            var input = "R 5\r\nU 8".Split("\r\n")
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(x => new Move(char.Parse(x.Split(" ")[0]), int.Parse(x.Split(" ")[1])));
             var routeInterpreter = new RouteInterpreter(input);
-
             routeInterpreter.CalculateRoute();
 
-            Assert.AreEqual(expected: 5, routeInterpreter.GetFullRope()[0].X);
-            Assert.AreEqual(expected: 8, routeInterpreter.GetFullRope()[0].Y);
-            Assert.AreEqual(expected: 5, routeInterpreter.GetFullRope()[1].X);
-            Assert.AreEqual(expected: 7, routeInterpreter.GetFullRope()[1].Y);
-            Assert.AreEqual(expected: 5, routeInterpreter.GetFullRope()[4].X);
-            Assert.AreEqual(expected: 4, routeInterpreter.GetFullRope()[4].Y);
-            Assert.AreEqual(expected: 4, routeInterpreter.GetFullRope()[5].X);
-            Assert.AreEqual(expected: 4, routeInterpreter.GetFullRope()[5].Y);
-            Assert.AreEqual(expected: 0, routeInterpreter.GetFullRope()[9].X);
-            Assert.AreEqual(expected: 0, routeInterpreter.GetFullRope()[9].Y);
+            var rope = routeInterpreter.GetFullRope();
+
+            Assert.AreEqual(expected: 5, rope[0].X);
+            Assert.AreEqual(expected: 8, rope[0].Y);
+            Assert.AreEqual(expected: 5, rope[1].X);
+            Assert.AreEqual(expected: 7, rope[1].Y);
+            Assert.AreEqual(expected: 5, rope[4].X);
+            Assert.AreEqual(expected: 4, rope[4].Y);
+            Assert.AreEqual(expected: 4, rope[5].X);
+            Assert.AreEqual(expected: 4, rope[5].Y);
+            Assert.AreEqual(expected: 0, rope[9].X);
+            Assert.AreEqual(expected: 0, rope[9].Y);
         }
+        
     }
 }
