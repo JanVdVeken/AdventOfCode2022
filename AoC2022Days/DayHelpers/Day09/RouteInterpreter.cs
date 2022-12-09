@@ -23,40 +23,30 @@
             {
                 _rope[i] = new Point(startingX, startingY);
             }
-            AddPointsToTail();
+            AddFirstAndLastPartsToVisitedLists();
         }
         public void CalculateRoute()
         {
             _moves.ForEach(move =>{Enumerable.Range(0, move.Times).ToList()
                 .ForEach(time =>
                     {
-                        //move header based on current move
-                        _rope[0] = move.MovePoint(_rope.First());
-
-                        //move tail based on previous part of rope
+                        _rope[0] = move.IncreasePointWith(_rope.First());
                         for (int tailCounter = 1; tailCounter < tailSize; tailCounter++)
                         {
                             _rope[tailCounter] = _rope[tailCounter].MoveTo(_rope[tailCounter - 1]);
                         }
-                        AddPointsToTail();
+                        AddFirstAndLastPartsToVisitedLists();
                     });
                 }
             );
         }
-        private void AddPointsToTail()
+        private void AddFirstAndLastPartsToVisitedLists()
         {
-            //rope.first == head
-            var p = _rope[1];
-            if (_visitedPointsSingleTail.Any(point => point.X == p.X && point.Y == p.Y) == false) _visitedPointsSingleTail.Add(p);
-            p = _rope.Last();
-            if (_visitedPointsLongTail.Any(point => point.X == p.X && point.Y == p.Y) == false) _visitedPointsLongTail.Add(p);
+            var firstPartOfTail = _rope[1];
+            if (_visitedPointsSingleTail.All(point => !firstPartOfTail.Equals(point))) _visitedPointsSingleTail.Add(firstPartOfTail);
+            var lastPartOfTail = _rope.Last();
+            if (_visitedPointsLongTail.All(point => !lastPartOfTail.Equals(point))) _visitedPointsLongTail.Add(lastPartOfTail);
         }
-        public Point GetPointOfTail(int index)
-        {
-            if (index >= tailSize) throw new ArgumentOutOfRangeException($"The maximum length of the tail is {tailSize} (given:{index}))");
-            return _rope[index];
-        }
-
         public List<Point> GetFullRope() => _rope.ToList();
         public int AmountOfVisitedPointsSingleTail() => _visitedPointsSingleTail.Count();
         public int AmountOfVisitedPointsLongTail() => _visitedPointsLongTail.Count();

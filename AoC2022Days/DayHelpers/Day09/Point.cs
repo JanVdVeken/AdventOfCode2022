@@ -32,5 +32,10 @@
             if (Math.Abs(diffInY) >= 1) newY = diffInY / Math.Abs(diffInY);
             return new Point(X + newX, Y + newY);
         }
+
+        public bool Equals(Point point)
+        {
+            return point.X == X && point.Y == Y;
+        }
     }
 }

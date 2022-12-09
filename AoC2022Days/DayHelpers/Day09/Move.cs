@@ -17,7 +17,7 @@
             Times = times;
         }
 
-        public Point MovePoint(Point p)
+        public Point IncreasePointWith(Point p)
         {
             return new Point(directions[Direction].X + p.X, directions[Direction].Y + p.Y);
         }
