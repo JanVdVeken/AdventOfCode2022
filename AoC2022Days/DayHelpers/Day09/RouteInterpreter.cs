@@ -23,7 +23,7 @@
             {
                 _rope[i] = new Point(startingX, startingY);
             }
-            AddFirstAndLastPartsToVisitedLists();
+            UpdateVisitedLists();
         }
         public void CalculateRoute()
         {
@@ -31,21 +31,25 @@
                 .ForEach(time =>
                     {
                         _rope[0] = move.UseOn(_rope.First());
-                        for (int tailCounter = 1; tailCounter < tailSize; tailCounter++)
-                        {
-                            _rope[tailCounter] = _rope[tailCounter].MoveTo(_rope[tailCounter - 1]);
-                        }
-                        AddFirstAndLastPartsToVisitedLists();
+                        MoveKnotsInRope();
+                        UpdateVisitedLists();
                     });
                 }
             );
         }
-        private void AddFirstAndLastPartsToVisitedLists()
+        private void UpdateVisitedLists()
         {
             var firstPartOfTail = _rope[1];
             if (_visitedPointsSingleTail.All(point => !firstPartOfTail.Equals(point))) _visitedPointsSingleTail.Add(firstPartOfTail);
             var lastPartOfTail = _rope.Last();
             if (_visitedPointsLongTail.All(point => !lastPartOfTail.Equals(point))) _visitedPointsLongTail.Add(lastPartOfTail);
+        }
+        private void MoveKnotsInRope()
+        {
+            for (int tailCounter = 1; tailCounter < tailSize; tailCounter++)
+            {
+                _rope[tailCounter] = _rope[tailCounter].MoveTo(_rope[tailCounter - 1]);
+            }
         }
         public List<Point> GetFullRope() => _rope.ToList();
         public int AmountOfVisitedPointsSingleTail() => _visitedPointsSingleTail.Count();
