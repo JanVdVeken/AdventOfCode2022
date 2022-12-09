@@ -23,7 +23,7 @@ public class AnswerService : IAnswerService
         {
             return new ToSoonAnswer("Wait a long time before doing something stupid again");
         }
-        if (result.ToLower().Contains("wrong"))
+        if (result.Contains("That's not the right answer"))
         {
             return new WrongAnswer($"{answer} was the wrong answer for {day} part {dayPart}");
         }
