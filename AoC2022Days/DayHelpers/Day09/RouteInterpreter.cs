@@ -30,8 +30,7 @@
             _moves.ForEach(move =>{Enumerable.Range(0, move.Times).ToList()
                 .ForEach(time =>
                     {
-                        _rope[0] = move.UseOn(_rope.First());
-                        MoveKnotsInRope();
+                        MoveHeaderAndKnots(move);
                         UpdateVisitedLists();
                     });
                 }
@@ -44,8 +43,9 @@
             var lastPartOfTail = _rope.Last();
             if (_visitedPointsLongTail.All(point => !lastPartOfTail.Equals(point))) _visitedPointsLongTail.Add(lastPartOfTail);
         }
-        private void MoveKnotsInRope()
+        private void MoveHeaderAndKnots(Move move)
         {
+            _rope[0] = move.UseOn(_rope.First());
             for (int tailCounter = 1; tailCounter < tailSize; tailCounter++)
             {
                 _rope[tailCounter] = _rope[tailCounter].MoveTo(_rope[tailCounter - 1]);
