@@ -26,11 +26,9 @@
             if (IsNeighbour(currentGoal)) return this;
             var diffInX = currentGoal.X - X;
             var diffInY = currentGoal.Y - Y;
-            var newX = 0;
-            var newY = 0;
-            if (Math.Abs(diffInX) >= 1) newX = diffInX / Math.Abs(diffInX);
-            if (Math.Abs(diffInY) >= 1) newY = diffInY / Math.Abs(diffInY);
-            return new Point(X + newX, Y + newY);
+            if (Math.Abs(diffInX) >= 1) diffInX /= Math.Abs(diffInX);
+            if (Math.Abs(diffInY) >= 1) diffInY /= Math.Abs(diffInY);
+            return new Point(X + diffInX, Y + diffInY);
         }
 
         public bool Equals(Point point)
