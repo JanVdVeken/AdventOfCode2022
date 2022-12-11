@@ -23,6 +23,7 @@ try
         new Day08(inputService,answerService,8,"Treetop Tree House"),
         new Day09(inputService,answerService,9,"Rope Bridge"),
         new Day10(inputService,answerService,10,"Cathode-Ray Tube"),
+        new Day11(inputService,answerService,11,"Monkey in the Middle"),
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)
