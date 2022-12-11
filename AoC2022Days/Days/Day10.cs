@@ -13,15 +13,20 @@ public class Day10 : Day
     public override string Puzzle1(IEnumerable<string> inputsString)
     {
         var instructions = inputsString.Where(x => !string.IsNullOrEmpty(x))
-            .Select(x => new Instruction(x))
-            .ToList();
-        var cpu = new AoCCpu(instructions);
+            .Select(x => new Instruction(x.Trim()));
 
-        return cpu.Calculate().ToString();
+        var cpu = new AoCCpu(instructions.ToList());
+
+        return cpu.CalculateSignalStrength().ToString();
     }
 
     public override string Puzzle2(IEnumerable<string> inputsString)
     {
-        throw new NotImplementedException();
+        var instructions = inputsString.Where(x => !string.IsNullOrEmpty(x))
+            .Select(x => new Instruction(x.Trim()));
+
+        var cpu = new AoCCpu(instructions.ToList());
+        cpu.DrawCrt();
+        return "Do not use the 'S' option!";
     }
 }
