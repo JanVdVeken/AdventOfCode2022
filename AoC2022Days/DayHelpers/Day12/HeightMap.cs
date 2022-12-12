@@ -29,7 +29,6 @@ namespace AoC2022Days.DayHelpers.Day12
             foreach (var point in _points.Where(x => x.GetCharValue() == 'a'))
             {
                 point.UpdateDistanceFromStart(0);
-                
                 ContinuePath(point, endPoint);
                 returnvalue = Math.Min(endPoint.DistanceFromStart, returnvalue);
             }
