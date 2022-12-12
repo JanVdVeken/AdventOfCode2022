@@ -44,7 +44,6 @@ namespace AoC2022Days.DayHelpers.Day12
             return endPoint.DistanceFromStart;
         }
 
-
         private void ContinuePath(HeightPoint currentPoint, HeightPoint destinationPoint)
         {
             var possibleNeighbours = GetPossibleNeighbours(currentPoint);
