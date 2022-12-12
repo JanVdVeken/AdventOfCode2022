@@ -25,10 +25,11 @@ namespace AoC2022Days.DayHelpers.Day12
         {
             var returnvalue = int.MaxValue;
             _points.ForEach(p => p.ResetDistanceFromStart());
-            foreach(var point in _points.Where(x => x.GetCharValue() == 'a'))
+            var endPoint = _points.First(x => x.GetCharValue() == 'E');
+            foreach (var point in _points.Where(x => x.GetCharValue() == 'a'))
             {
                 point.UpdateDistanceFromStart(0);
-                var endPoint = _points.First(x => x.GetCharValue() == 'E');
+                
                 ContinuePath(point, endPoint);
                 returnvalue = Math.Min(endPoint.DistanceFromStart, returnvalue);
             }
