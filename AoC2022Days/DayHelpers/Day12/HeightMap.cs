@@ -1,9 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-using System.Globalization;
-using System.Net.Http.Headers;
-using System.Reflection.Metadata.Ecma335;
-
-namespace AoC2022Days.DayHelpers.Day12
+﻿namespace AoC2022Days.DayHelpers.Day12
 {
     public class HeightMap
     {

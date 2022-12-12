@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace AoC2022Days.DayHelpers.Day12
+﻿namespace AoC2022Days.DayHelpers.Day12
 {
     public class HeightPoint
     {
