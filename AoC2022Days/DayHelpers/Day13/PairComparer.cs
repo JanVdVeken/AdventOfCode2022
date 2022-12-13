@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Nodes;
+﻿using System.ComponentModel;
+using System.Text.Json.Nodes;
 
 namespace AoC2022Days.DayHelpers.Day13
 {
@@ -26,8 +27,12 @@ namespace AoC2022Days.DayHelpers.Day13
             var leftArray = left is JsonArray ? left as JsonArray: new JsonArray((int)left);
             var rightArray = right is JsonArray ? right as JsonArray : new JsonArray((int)right);
             var combined = Enumerable.Zip(leftArray, rightArray);
-            return combined.Select(x => CalculateOrderRecusive(x.First, x.Second))
-                .FirstOrDefault(x => x != 0 , leftArray.Count - rightArray.Count);
+            foreach(var pair in combined)
+            {
+                var result = CalculateOrderRecusive(pair.First, pair.Second);
+                if (result != 0) return result;
+            }
+            return leftArray.Count - rightArray.Count;
         }
     }
 }
