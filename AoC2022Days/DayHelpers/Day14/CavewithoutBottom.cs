@@ -12,7 +12,6 @@ namespace AoC2022Days.DayHelpers.Day14
                 .ForEach(pointList => pointList.ForEach(p => pointsToWallUp.Add(p)));
 
             _caveAmountOfCols = pointsToWallUp.Max(p => p.X)+2;
-            _lowestUsedCol = pointsToWallUp.Min(p => p.X)-1;
             _caveAmountOfRows = pointsToWallUp.Max(p => p.Y)+2;
             _cavePlan = new char[_caveAmountOfCols, _caveAmountOfRows];
             for (int i = 0; i < _caveAmountOfCols; i++)

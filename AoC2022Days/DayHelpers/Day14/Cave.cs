@@ -8,7 +8,6 @@ namespace AoC2022Days.DayHelpers.Day14
     {
         protected CavePoint _sandStartingPoint;
         protected int _caveAmountOfCols;
-        protected int _lowestUsedCol;
         protected int _caveAmountOfRows;
         protected char[,] _cavePlan;
 
