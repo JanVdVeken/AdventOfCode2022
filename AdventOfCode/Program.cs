@@ -26,6 +26,7 @@ try
         new Day11(inputService,answerService,11,"Monkey in the Middle"),
         new Day12(inputService,answerService,12,"Hill Climbing Algorithm"),
         new Day13(inputService,answerService,13,"Distress Signal"),
+        new Day14(inputService,answerService,14,"Regolith Reservoir"),
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)
