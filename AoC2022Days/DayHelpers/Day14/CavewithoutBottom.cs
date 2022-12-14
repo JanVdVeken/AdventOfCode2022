@@ -2,19 +2,18 @@
 
 namespace AoC2022Days.DayHelpers.Day14
 {
-    public class CaveWithBottom : Cave
+    public class CavewithoutBottom : Cave
     {
-
-        public CaveWithBottom(List<CaveLine> inputs, CavePoint sandStartingPoint)
+        public CavewithoutBottom(List<CaveLine> inputs, CavePoint sandStartingPoint)
         {
             _sandStartingPoint = sandStartingPoint;
             var pointsToWallUp = new List<CavePoint>();
             inputs.Select(p => p.GetPointsOfLine().ToList()).ToList()
                 .ForEach(pointList => pointList.ForEach(p => pointsToWallUp.Add(p)));
 
-            _lowestUsedCol = pointsToWallUp.Min(p => p.X) - 10;
-            _caveAmountOfCols = pointsToWallUp.Max(p => p.X) * 2;
-            _caveAmountOfRows = pointsToWallUp.Max(p => p.Y) + 3;
+            _caveAmountOfCols = pointsToWallUp.Max(p => p.X)+2;
+            _lowestUsedCol = pointsToWallUp.Min(p => p.X)-1;
+            _caveAmountOfRows = pointsToWallUp.Max(p => p.Y)+2;
             _cavePlan = new char[_caveAmountOfCols, _caveAmountOfRows];
             for (int i = 0; i < _caveAmountOfCols; i++)
             {
@@ -23,10 +22,6 @@ namespace AoC2022Days.DayHelpers.Day14
             foreach (var point in pointsToWallUp)
             {
                 _cavePlan[point.X, point.Y] = '#';
-            }
-            for (int i = 0; i < _caveAmountOfCols; i++)
-            {
-                _cavePlan[i, _caveAmountOfRows - 1] = '#';
             }
         }
 
@@ -59,11 +54,15 @@ namespace AoC2022Days.DayHelpers.Day14
                         currentPoint = new CavePoint(oneLower.X, oneLower.Y);
                         continue;
                     }
-                    if (currentPoint.Y == _sandStartingPoint.Y) continueDroppingSand = false;
+                    if (oneLower.Y >= _caveAmountOfRows)
+                    {
+                        continueDroppingSand = false;
+                        _cavePlan[currentPoint.X, currentPoint.Y] = '.';
+                    }
                     break;
                 }
             }
-            return count;
+            return count -1;
         }
     }
 }

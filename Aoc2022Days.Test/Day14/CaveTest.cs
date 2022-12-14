@@ -19,10 +19,10 @@ namespace Aoc2022Days.Test.Day14
                     lineInputs.Add(new CaveLine(new CavePoint(lines[i]), new CavePoint(lines[i + 1])));
                 }
             }
-            var cave = new Cave(lineInputs, new CavePoint("500,0"));
-            cave.ToString();
+            var cave = new CavewithoutBottom(lineInputs, new CavePoint("500,0"));
+            Console.WriteLine(cave.ToString());
             var result = cave.CalculateSandBeforeOverflow().ToString();
-            cave.ToString();
+            Console.WriteLine(cave.ToString());
             Assert.AreEqual("24", result);
         }
 

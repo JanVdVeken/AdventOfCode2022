@@ -21,7 +21,7 @@ namespace AoC2022Days.Days
                     lineInputs.Add(new CaveLine(new CavePoint(lines[i]), new CavePoint(lines[i + 1])));
                 }
             }
-            var cave = new Cave(lineInputs,new CavePoint("500,0"));
+            var cave = new CavewithoutBottom(lineInputs,new CavePoint("500,0"));
             return cave.CalculateSandBeforeOverflow().ToString();
         }
 
