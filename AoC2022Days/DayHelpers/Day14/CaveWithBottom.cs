@@ -17,8 +17,8 @@ namespace AoC2022Days.DayHelpers.Day14
             inputs.Select(p => p.GetPointsOfLine().ToList()).ToList()
                 .ForEach(pointList => pointList.ForEach(p => pointsToWallUp.Add(p)));
 
-            _lowestUsedCol = pointsToWallUp.Min(p => p.X)-10;
-            _caveAmountOfCols = pointsToWallUp.Max(p => p.X) *2;
+            _lowestUsedCol = pointsToWallUp.Min(p => p.X) - 10;
+            _caveAmountOfCols = pointsToWallUp.Max(p => p.X) * 2;
             _caveAmountOfRows = pointsToWallUp.Max(p => p.Y) + 3;
             _cavePlan = new char[_caveAmountOfCols, _caveAmountOfRows];
             for (int i = 0; i < _caveAmountOfCols; i++)
@@ -31,7 +31,7 @@ namespace AoC2022Days.DayHelpers.Day14
             }
             for (int i = 0; i < _caveAmountOfCols; i++)
             {
-                _cavePlan[i, _caveAmountOfRows-1] = '#';
+                _cavePlan[i, _caveAmountOfRows - 1] = '#';
             }
         }
 
@@ -73,7 +73,7 @@ namespace AoC2022Days.DayHelpers.Day14
 
         private bool MovePoint(CavePoint current, CavePoint lower)
         {
-            if(lower.Y == _caveAmountOfRows) return false;
+            if (lower.Y == _caveAmountOfRows) return false;
             if (_cavePlan[lower.X, lower.Y] == '.')
             {
                 _cavePlan[current.X, current.Y] = '.';
@@ -88,7 +88,7 @@ namespace AoC2022Days.DayHelpers.Day14
             var sb = new StringBuilder();
             for (int j = 0; j < _caveAmountOfRows; j++)
             {
-                for (int i = _lowestUsedCol; i < _caveAmountOfCols; i++) sb.Append(_cavePlan[i,j]);
+                for (int i = _lowestUsedCol; i < _caveAmountOfCols; i++) sb.Append(_cavePlan[i, j]);
                 sb.AppendLine();
             }
             return sb.ToString();
