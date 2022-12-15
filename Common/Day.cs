@@ -1,5 +1,6 @@
 ﻿using Common.AnswerCodes;
 using Common.Services;
+using System.Diagnostics;
 
 namespace Common;
 
@@ -26,7 +27,7 @@ public abstract class Day
 
     public async Task HandleSelect()
     {
-        Console.WriteLine("Do you want to solve Part 1(S) or 2(S)?");
+        Console.WriteLine("Do you want to solve Part 1(S) or 2(S) or P (both with Performace)?");
         var answer = "";
         switch (Console.ReadLine())
         {
@@ -41,7 +42,9 @@ public abstract class Day
                 break;
             case "2S":
                 answer = (await PostAnswer2Async()).InternalMessage;
-
+                break;
+            case "P":
+                LogPerformaceBothPartsAsync();
                 break;
             default:
                 Console.WriteLine($"Not implemented");
@@ -85,5 +88,22 @@ public abstract class Day
         var answer = Puzzle2(await GatherInputAsync());
         Console.WriteLine($"Posting {answer} to api...");
         return await _answerService.PostAnswerAsync(DayNumber, 2, answer);
+    }
+    private async void LogPerformaceBothPartsAsync()
+    {
+        await GatherInputAsync();
+        Stopwatch stopwatch = new();
+        Dictionary<string, double> timings_per_action = new();
+        Console.WriteLine($"Getting metrics for day {DayNumber}...");
+        stopwatch.Reset();
+        stopwatch.Start();
+        var p1Result = Puzzle1(_input);
+        stopwatch.Stop();
+        Console.WriteLine($"Puzzle 1) {(double)stopwatch.ElapsedTicks / TimeSpan.TicksPerMillisecond}ms \t=> {p1Result}");
+        stopwatch.Reset();
+        stopwatch.Start();
+        var p2Result = Puzzle2(_input);
+        stopwatch.Stop();
+        Console.WriteLine($"Puzzle 2) {(double)stopwatch.ElapsedTicks / TimeSpan.TicksPerMillisecond}ms \t=> {p2Result}");
     }
 }
