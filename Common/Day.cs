@@ -27,7 +27,7 @@ public abstract class Day
 
     public async Task HandleSelect()
     {
-        Console.WriteLine("Do you want to solve Part 1(S) or 2(S) or P (both with Performace)?");
+        Console.WriteLine("Do you want to solve Part 1(S) or 2(S) or P (both with Performance)?");
         var answer = "";
         switch (Console.ReadLine())
         {

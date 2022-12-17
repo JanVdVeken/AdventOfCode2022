@@ -47,7 +47,7 @@ namespace Common.Services
             if (_yearOfChallenge < DateTime.Now.Year) return MaxAmountOfDays;
             if (_yearOfChallenge == DateTime.Now.Year && DateTime.Now.Month == 12)
             {
-                return Math.Min(DateTime.Now.Day, MaxAmountOfDays);
+                return Math.Min(DateTime.UtcNow.AddHours(-5).Day, MaxAmountOfDays);
             }
             return 0;
         }
