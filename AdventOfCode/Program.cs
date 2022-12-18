@@ -29,6 +29,8 @@ try
         new Day14(inputService,answerService,14,"Regolith Reservoir"),
         new Day15(inputService,answerService,15,"Beacon Exclusion Zone"),
         new Day16(inputService,answerService,16,"Proboscidea Volcanium"),
+        
+        new Day18(inputService,answerService,18,"Boiling Boulders"),
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)
