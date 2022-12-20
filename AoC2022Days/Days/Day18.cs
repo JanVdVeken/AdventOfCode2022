@@ -1,6 +1,7 @@
 ﻿using AoC2022Days.DayHelpers.Day18;
 using Common;
 using Common.Services;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AoC2022Days.Days;
 
@@ -16,39 +17,42 @@ public class Day18 : Day
             .Select(x => new AoCCube(x)).ToList();
         return cubes.Sum(x => x.CountFreeSides(cubes)).ToString();
     }
+    int _minX;
+    int _minY;
+    int _minZ;
+    int _maxX;
+    int _maxY;
+    int _maxZ;
+    new List<AoCCube> _enclosingCubes;
 
     public override string Puzzle2(IEnumerable<string> inputsString)
     {
         var cubes = inputsString.Where(x => !string.IsNullOrEmpty(x))
             .Select(x => new AoCCube(x)).ToList();
-        var minX = cubes.Min(c => c.X);
-        var minY = cubes.Min(c => c.Y);
-        var minZ = cubes.Min(c => c.Z);
-        var maxX = cubes.Max(c => c.X);
-        var maxY = cubes.Max(c => c.Y);
-        var maxZ = cubes.Max(c => c.Z);
-        var count = 0;
-        for (int i = minX+1; i < maxX; i++)
-        {
-            for (int j = minY+1; j < maxY; j++)
-            {
-                for (int k = minZ+1; k < maxZ; k++)
-                {
-                    var currentCube= new AoCCube(i,j,k);
-                    if (cubes.Any(c => c.AreEqual(currentCube)))
-                    {
-                        continue;
-                    }
+        _minX = cubes.Min(c => c.X) - 1;
+        _minY = cubes.Min(c => c.Y) - 1;
+        _minZ = cubes.Min(c => c.Z) - 1;
+        _maxX = cubes.Max(c => c.X) + 1;
+        _maxY = cubes.Max(c => c.Y) + 1;
+        _maxZ = cubes.Max(c => c.Z) + 1;
+        _enclosingCubes = new List<AoCCube>();
+        var startingCube = new AoCCube(_minX, _minY, _minZ);
+        GetAllEnclosingCubes(startingCube, cubes);
 
-                    if (currentCube.HasNeighbour(cubes))
-                    {
-                        count += 6 - currentCube.CountFreeSides(cubes);
-                    }
-                    
-                }
-            }
+        return _enclosingCubes.Sum(p => p.ConnectedToList(cubes)).ToString();
+    }
+
+    private void GetAllEnclosingCubes(AoCCube cube, List<AoCCube> allCubes)
+    {
+        if (cube.X < _minX || cube.X > _maxX
+            || cube.Y < _minY || cube.Y > _maxY
+            || cube.Z < _minZ || cube.Z > _maxZ) return;
+        _enclosingCubes.Add(cube);
+        foreach (var neighbour in cube.GetNeighbours())
+        {
+            if (_enclosingCubes.Any(c => c.AreEqual(neighbour))) continue;
+            if (allCubes.Any(c => c.AreEqual(neighbour))) continue;
+            GetAllEnclosingCubes(neighbour, allCubes);
         }
-        return (cubes.Sum(x => x.CountFreeSides(cubes)) - count).ToString();
-        
     }
 }
