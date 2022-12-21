@@ -31,6 +31,9 @@ try
         new Day16(inputService,answerService,16,"Proboscidea Volcanium"),
         
         new Day18(inputService,answerService,18,"Boiling Boulders"),
+
+
+        new Day21(inputService,answerService,21,"Monkey Math"),
     };
     Console.Title = $"Advent Of Code {yearOfChallenge}";
     while (true)
